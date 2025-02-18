@@ -1,6 +1,6 @@
 import React, {useRef, useImperativeHandle, forwardRef} from 'react'
-import {Animated, Image as NativeImage, View} from 'react-native'
-import Svg, {Image, G, Path} from 'react-native-svg'
+import {Animated, Image, View} from 'react-native'
+import Svg, {Image as SvgImage, G, Path} from 'react-native-svg'
 
 import tw from '@/lib/tailwind'
 
@@ -126,7 +126,7 @@ export const Roulette = forwardRef<{spin: () => void}, RouletteProps>(
                 const rotationAngle = segmentAngle * (180 / Math.PI) + 90
 
                 return (
-                  <Image
+                  <SvgImage
                     key={index}
                     x={x - imageWidth / 2}
                     y={y - imageHeight / 2}
@@ -142,7 +142,7 @@ export const Roulette = forwardRef<{spin: () => void}, RouletteProps>(
         </Animated.View>
 
         <View style={tw`flex-1 absolute -top-4 -left-4 -right-4 -bottom-4 items-center justify-center`}>
-          <NativeImage style={{transform: [{scale: 0.95}]}} source={require('@/assets/images/arrows.png')} />
+          <Image style={{transform: [{scale: 0.95}]}} source={require('@/assets/images/arrows.png')} />
         </View>
       </View>
     )

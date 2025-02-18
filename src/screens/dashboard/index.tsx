@@ -14,9 +14,8 @@ import {segments} from './data'
 import tw from '@/lib/tailwind'
 
 export default function Dashboard() {
-  const [result, setResult] = useState<Segment | null>(null)
-  const [spinning, setSpinning] = useState(false)
   const [spins, setSpins] = useState(1)
+  const [spinning, setSpinning] = useState(false)
 
   const rouletteRef = useRef<{spin: () => void}>(null)
 
@@ -29,8 +28,7 @@ export default function Dashboard() {
   }
 
   const onFinished = async (segment: Segment) => {
-    setResult(segment)
-    // navigation.navigate('WinningSlice', {segment})
+    navigation.navigate('WinningSlice', {segment})
   }
 
   return (
@@ -55,7 +53,7 @@ export default function Dashboard() {
           <SpinBackground>
             <SpinButton onPress={onSpin} title="Spin" />
           </SpinBackground>
-          <View style={tw`h-[100px] bg-transparent`} />
+          <View style={tw`h-[120px] bg-transparent`} />
         </Conditional>
       </Animated.View>
     </View>
