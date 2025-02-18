@@ -10,13 +10,13 @@ const buttonStyles = 'py-2 px-4 h-[58px] items-center justify-center rounded-ful
 const buttonTextStyles = 'font-bold text-lg'
 
 const OutlineButton = ({title, onPress}: ButtonProps) => (
-  <TouchableOpacity onPress={onPress} style={tw`${buttonStyles} bg-transparent border border-[#21BD64]`}>
-    <Text style={tw`${buttonTextStyles} text-[#21BD64]`}>{title}</Text>
+  <TouchableOpacity onPress={onPress} style={tw`${buttonStyles} bg-transparent border border-secondary`}>
+    <Text style={tw`${buttonTextStyles} text-secondary`}>{title}</Text>
   </TouchableOpacity>
 )
 
 const SolidButton = ({title, onPress}: ButtonProps) => (
-  <TouchableOpacity onPress={onPress} style={tw`${buttonStyles} bg-[#FB3D48}`}>
+  <TouchableOpacity onPress={onPress} style={tw`${buttonStyles} bg-tertiary`}>
     <Text style={tw`${buttonTextStyles} text-white`}>{title}</Text>
   </TouchableOpacity>
 )

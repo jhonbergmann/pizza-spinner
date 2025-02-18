@@ -30,7 +30,9 @@ export default function WinningSlice() {
 
       <Animated.View style={tw`w-full`} entering={FadeInDown.duration(1500)}>
         <View style={tw`gap-2`}>
-          <Text style={tw`text-2xl text-center font-medium text-black`}>{`You Got a\n${segment.title} Slice`}</Text>
+          <Text style={tw`text-2xl text-center font-medium text-black`}>
+            {`You Got a\n`} <Text style={tw`text-secondary`}>{`${segment.title}`}</Text> Slice
+          </Text>
           <Text style={tw`text-sm font-medium text-center`}>Click Below to Claim Slice</Text>
         </View>
       </Animated.View>
