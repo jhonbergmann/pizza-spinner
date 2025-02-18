@@ -1,49 +1,63 @@
 import React, {useRef, useState} from 'react'
 import {Text, View} from 'react-native'
+import {useNavigation} from '@react-navigation/native'
+import Animated, {FadeIn, FadeOut} from 'react-native-reanimated'
 
-import {Roulette} from '../../components/roulette'
-import {Spin} from '../../components/spin'
-import {Background} from '../../components/spin/components/background'
+import {Pin} from '@/components/pin'
+import {Conditional} from '@/components/conditional'
+import {Spin as SpinButton} from '@/components/spin'
+import {Roulette, Segment} from '@/components/roulette'
+import {Background as SpinBackground} from '@/components/spin/components/background'
+
+import {segments} from './data'
+
+import tw from '@/lib/tailwind'
 
 export default function Dashboard() {
-  const [result, setResult] = useState<{id: number; title: string; image: string} | null>(null)
+  const [result, setResult] = useState<Segment | null>(null)
+  const [spinning, setSpinning] = useState(false)
+  const [spins, setSpins] = useState(1)
 
   const rouletteRef = useRef<{spin: () => void}>(null)
 
-  const segments = [
-    {id: 1, title: 'Pepperoni', image: require('../../assets/images/pizza-slice/slice_1.png')},
-    {id: 2, title: 'Quatro Queijos', image: require('../../assets/images/pizza-slice/slice_2.png')},
-    {id: 3, title: 'Margarita', image: require('../../assets/images/pizza-slice/slice_3.png')},
-    {id: 4, title: 'Cogumelos', image: require('../../assets/images/pizza-slice/slice_4.png')},
-    {id: 5, title: 'Atum com Cebola', image: require('../../assets/images/pizza-slice/slice_5.png')},
-    {id: 6, title: 'Frango com Catupiry', image: require('../../assets/images/pizza-slice/slice_6.png')},
-    {id: 7, title: 'Presunto e Queijo', image: require('../../assets/images/pizza-slice/slice_7.png')},
-    {id: 8, title: 'Calabresa com Cebola', image: require('../../assets/images/pizza-slice/slice_8.png')},
-  ]
+  const navigation = useNavigation()
 
   const onSpin = () => {
+    setSpinning(true)
+    setSpins(spins - 1)
     rouletteRef.current?.spin()
-    setResult(null)
   }
 
-  const onFinished = async (segment: any) => {
+  const onFinished = async (segment: Segment) => {
     setResult(segment)
+    // navigation.navigate('WinningSlice', {segment})
   }
 
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#EAE6DF'}}>
-      <View />
+    <View style={tw`flex-1 items-center justify-between bg-background`}>
+      <View style={tw`mt-8`} />
 
       <Roulette ref={rouletteRef} segments={segments} onFinished={onFinished} />
 
-      <View style={{marginTop: 50}}>
-        <Text style={{fontSize: 24, fontFamily: 'Poppins_500Medium', color: 'black'}}>Spin to Unlock Pizza Slice</Text>
-        <Text style={{fontSize: 12, fontFamily: 'Poppins_600SemiBold', color: '#9DA7B3', textAlign: 'center'}}>You have 0 Spins Remaining</Text>
+      <Conditional render={spinning}>
+        <Pin />
+      </Conditional>
+
+      <View>
+        <Text style={tw`text-2xl font-medium text-black`}>Spin to Unlock Pizza Slice</Text>
+        <Conditional render={spins === 0}>
+          <Text style={tw`text-xs font-semibold text-primary text-center`}>You have 0 Spins Remaining</Text>
+        </Conditional>
       </View>
 
-      <Background>
-        <Spin onPress={onSpin} title="Spin" />
-      </Background>
+      <Animated.View style={tw`w-full`} entering={FadeIn.duration(500)} exiting={FadeOut.duration(500)} key={spinning ? 'spinning' : 'not-spinning'}>
+        <Conditional render={!spinning && spins > 0}>
+          <SpinBackground>
+            <SpinButton onPress={onSpin} title="Spin" />
+          </SpinBackground>
+          <View style={tw`h-[100px] bg-transparent`} />
+        </Conditional>
+      </Animated.View>
     </View>
   )
 }

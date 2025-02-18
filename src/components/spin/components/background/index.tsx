@@ -1,5 +1,7 @@
 import {View} from 'react-native'
 
+import tw from '@/lib/tailwind'
+
 interface BackgroundProps {
   children: React.ReactNode
   color?: string
@@ -7,9 +9,9 @@ interface BackgroundProps {
 
 export const Background = ({children, color = '#F8C25B'}: BackgroundProps) => {
   return (
-    <View style={{width: '100%', alignItems: 'center', justifyContent: 'center'}}>
-      <View style={{position: 'absolute', top: -20, left: 0, width: '100%', height: 80, backgroundColor: color, transform: [{skewY: '-5deg'}]}} />
-      <View style={{width: '100%', backgroundColor: color, paddingBottom: 60, alignItems: 'center'}}>{children}</View>
+    <View style={tw`w-full items-center justify-center`}>
+      <View style={[tw`absolute top-[-20px] left-0 w-full h-20`, {backgroundColor: color, transform: [{skewY: '-5deg'}]}]} />
+      <View style={tw`w-full bg-[${color}] pb-15 items-center`}>{children}</View>
     </View>
   )
 }

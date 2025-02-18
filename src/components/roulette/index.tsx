@@ -2,7 +2,9 @@ import React, {useRef, useImperativeHandle, forwardRef} from 'react'
 import {Animated, Image as NativeImage, View} from 'react-native'
 import Svg, {Image, G, Path} from 'react-native-svg'
 
-interface Segment {
+import tw from '@/lib/tailwind'
+
+export interface Segment {
   id: number
   title: string
   image: any
@@ -62,9 +64,9 @@ export const Roulette = forwardRef<{spin: () => void}, RouletteProps>(
       if (finished) {
         clearInterval(timerHandle)
         timerHandle = 0
-        const rotationAdjustment = (angleCurrent + Math.PI / 2) % (Math.PI * 2)
+        const rotationAdjustment = (angleCurrent + Math.PI * 1.5) % (Math.PI * 2)
         const segmentIndex = Math.floor((rotationAdjustment / (Math.PI * 2)) * segments.length)
-        const winningSegmentIndex = (segments.length - segmentIndex - 1) % segments.length
+        const winningSegmentIndex = (segmentIndex + segments.length / 2) % segments.length
         const winningSegment = segments[winningSegmentIndex]
         onFinished(winningSegment)
       }
@@ -90,7 +92,7 @@ export const Roulette = forwardRef<{spin: () => void}, RouletteProps>(
               {
                 rotate: rotationAnim.interpolate({
                   inputRange: [0, Math.PI * 2],
-                  outputRange: ['0deg', '360deg'],
+                  outputRange: ['0deg', '-360deg'],
                 }),
               },
             ],
@@ -139,8 +141,8 @@ export const Roulette = forwardRef<{spin: () => void}, RouletteProps>(
           </Svg>
         </Animated.View>
 
-        <View style={{flex: 1, position: 'absolute', top: -15, left: -15, right: -15, bottom: -15, alignItems: 'center', justifyContent: 'center'}}>
-          <NativeImage style={{transform: [{scale: 0.95}]}} source={require('../../assets/images/arrows.png')} />
+        <View style={tw`flex-1 absolute -top-4 -left-4 -right-4 -bottom-4 items-center justify-center`}>
+          <NativeImage style={{transform: [{scale: 0.95}]}} source={require('@/assets/images/arrows.png')} />
         </View>
       </View>
     )
