@@ -2,6 +2,7 @@ import React, {useRef, useState} from 'react'
 import {Text, View} from 'react-native'
 import {useNavigation} from '@react-navigation/native'
 import Animated, {FadeIn, FadeOut} from 'react-native-reanimated'
+import * as Haptics from 'expo-haptics'
 
 import {Pin} from '@/components/pin'
 import {Conditional} from '@/components/conditional'
@@ -29,6 +30,7 @@ export default function Dashboard() {
 
   const onFinished = async (segment: Segment) => {
     navigation.navigate('WinningSlice', {segment})
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium)
   }
 
   return (
