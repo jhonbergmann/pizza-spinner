@@ -11,8 +11,10 @@
     "format": "npx prettier --write ."
   },
   "dependencies": {
+    "@expo-google-fonts/poppins": "^0.2.3",
     "expo": "~52.0.35",
     "expo-av": "^15.0.2",
+    "expo-font": "^13.0.3",
     "expo-haptics": "^14.0.1",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
