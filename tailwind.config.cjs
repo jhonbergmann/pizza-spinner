@@ -9,7 +9,7 @@ module.exports = {
       fontFamily: {
         regular: [fonts.regular],
         medium: [fonts.medium],
-        semiBold: [fonts.semi_bold],
+        'semi-bold': [fonts.semi_bold],
         bold: [fonts.bold],
       },
     },
