@@ -7,7 +7,7 @@
   <img alt="GitHub Top Language" src="https://img.shields.io/github/languages/top/jhonbergmann/pizza-spinner" />
 </p>
 
-<p align="center">Spin the wheel and compete for prizes.</p>
+<p align="center">Spin to win a slice of pizza.</p>
 
 <p align="center">
   <img src="docs/assets/illustration1.jpg" width="30%"  alt="illustration" >
