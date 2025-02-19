@@ -20,9 +20,9 @@
   <img src="docs/assets/preview.gif" width="45%"  alt="illustration" >
 </p>
 
-## 🎨 Figma
+## 🎨 UI
 
-[click here](https://www.figma.com/design/tcXFNfmR0WSKNrBHsaMek2/Pizza-Spinner-Mobile-App)
+[Figma, click here](https://www.figma.com/design/tcXFNfmR0WSKNrBHsaMek2/Pizza-Spinner-Mobile-App)
 
 ## 📦 Tech Stack
 
